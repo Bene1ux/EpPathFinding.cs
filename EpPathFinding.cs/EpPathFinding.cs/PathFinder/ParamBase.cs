@@ -48,6 +48,7 @@ namespace EpPathFinding.cs
 
             if (iSearchGrid != null)
                 m_searchGrid = iSearchGrid;
+
             m_searchGrid.Reset();
             m_startNode = m_searchGrid.GetNodeAt(iStartPos.x, iStartPos.y);
             m_endNode = m_searchGrid.GetNodeAt(iEndPos.x, iEndPos.y);

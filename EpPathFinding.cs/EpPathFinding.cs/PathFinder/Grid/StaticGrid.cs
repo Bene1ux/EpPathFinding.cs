@@ -167,12 +167,17 @@ namespace EpPathFinding.cs
 
         public void Reset(bool[][] iMatrix)
         {
-            for (int widthTrav = 0; widthTrav < width; widthTrav++)
+          /*  for (int widthTrav = 0; widthTrav < width; widthTrav++)
             {
                 for (int heightTrav = 0; heightTrav < height; heightTrav++)
                 {
                     m_nodes[widthTrav][heightTrav].Reset();
                 }
+            }*/
+
+            foreach(var node in JumpPointFinder.affectedNodes)
+            {
+                node?.Reset();
             }
 
             if (iMatrix == null)

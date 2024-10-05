@@ -181,6 +181,8 @@ namespace EpPathFinding.cs
     }
     public class JumpPointFinder
     {
+
+        public static List<Node> affectedNodes = new List<Node>();
         public static List<GridPos> GetFullPath(List<GridPos> routeFound)
         {
             if (routeFound == null)
@@ -224,6 +226,7 @@ namespace EpPathFinding.cs
             Node tEndNode = iParam.EndNode;
             Node tNode;
             bool revertEndNodeWalkable = false;
+            affectedNodes.Clear();
 
             // set the `g` and `f` value of the start node to be 0
             tStartNode.startToCurNodeLen = 0;
@@ -232,6 +235,7 @@ namespace EpPathFinding.cs
             // push the start node into the open list
             tOpenList.Add(tStartNode);
             tStartNode.isOpened = true;
+            affectedNodes.Add(tStartNode);
 
             if (iParam.CurEndNodeUnWalkableTreatment == EndNodeUnWalkableTreatment.ALLOW && !iParam.SearchGrid.IsWalkableAt(tEndNode.x, tEndNode.y))
             {
@@ -303,6 +307,11 @@ namespace EpPathFinding.cs
 
                     if (!tJumpNode.isOpened || tStartToJumpNodeLen < tJumpNode.startToCurNodeLen)
                     {
+                       
+                        if (!affectedNodes.Contains(tJumpNode))
+                        {
+                            affectedNodes.Add(tJumpNode);
+                        }
                         tJumpNode.startToCurNodeLen = tStartToJumpNodeLen;
                         tJumpNode.heuristicCurNodeToEndLen = (tJumpNode.heuristicCurNodeToEndLen == null ? tHeuristic(Math.Abs(tJumpPoint.x - tEndX), Math.Abs(tJumpPoint.y - tEndY)) : tJumpNode.heuristicCurNodeToEndLen);
                         tJumpNode.heuristicStartToEndLen = tJumpNode.startToCurNodeLen + tJumpNode.heuristicCurNodeToEndLen.Value;

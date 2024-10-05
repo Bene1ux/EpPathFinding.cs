@@ -41,6 +41,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using EpPathFindingDemo;
 
 namespace EpPathFinding.cs
 {
@@ -73,8 +74,8 @@ namespace EpPathFinding.cs
                     break;
             
             }
-            width = 18;
-            height = 18;
+            width = SearchGridForm.cellSize;
+            height = SearchGridForm.cellSize;
             boxRec = new Rectangle(x, y, width, height);
         }
 
